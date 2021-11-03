@@ -1,5 +1,10 @@
 extends layout.pug
 block content
+    if errors.length
+        ul The following errors were found:
+            each error in errors
+                li= error
+
     form(method="post" action="/create")
         input(type="hidden" name="_csrf" value=csrfToken)
         label(for="firstName") First Name:
