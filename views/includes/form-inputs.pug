@@ -1,5 +1,4 @@
-mixin formInput(csrfToken, firstName, lastName, email, password, confirmedPassword)
-    input(type="hidden" name="_csrf" value=csrfToken)
+mixin formInput(firstName, lastName, email, password, confirmedPassword)
     label(for="firstName") First Name:
     input(type="text" id="firstName" name="firstName" value=firstName)
     label(for="lastName") Last Name:

@@ -4,17 +4,19 @@ include includes/form-inputs.pug
 block content
     +errorsList(errors)
     form(method="post" action="/create-interesting")
-        +formInput()
+        input(type="hidden" name="_csrf" value=csrfToken)
+        +formInput(firstName, lastName, email, password, confirmedPassword)
         label(for="age") Age:
-        input(type="text" id="age" name="age" value=age)
+        input(type="number" id="age" name="age" value=age)
         label(for="favoriteBeatle") Favorite Beatle:
-        select(id="favoriteBeatle" name="favoriteBeatle")
+        select(id="favoriteBeatle" name="favoriteBeatle" value=favoriteBeatle)
+            option(value="") --Please choose an option--
             option(value="John") John
             option(value="Paul") Paul
             option(value="Ringo") Ringo
             option(value="George") George
             option(value="Scooby-Doo") Scooby-Doo
         label(for="iceCream") Ice Cream?
-        input(type="checkbox" id="iceCream" name="iceCream")
+        input(type="checkbox" id="iceCream" name="iceCream" checked=iceCream)
         label(for="createUser") Create Interesting User
-        input(type='submit' name="createUser" value="Create User")
+        input(type='submit' name="createUser" value="Create Interesting User")
