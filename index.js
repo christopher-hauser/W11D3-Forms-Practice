@@ -30,8 +30,9 @@ app.get("/create", csurfProtection, (req, res) => {
 })
 
 const validation = (req, res, next) => {
-  const { firstName, lastName, email, password, confirmedPassword } = req.body;
+  const { firstName, lastName, email, password, confirmedPassword, age, favoriteBeatle, iceCream } = req.body;
   req.errors = [];
+
 
   if (!firstName) {
     req.errors.push("Please provide a first name.");
@@ -48,6 +49,18 @@ const validation = (req, res, next) => {
   if (password !== confirmedPassword) {
     req.errors.push("The provided values for the password and password confirmation fields did not match.")
   }
+  if (age !== undefined && age < 0 || age > 120 || !(typeof age === Number )) {
+    req.errors.push('age must be a valid age')
+  }
+  if (req.path === '/create-interesting') {
+    if (favoriteBeatle === undefined) {
+      req.errors.push('favoriteBeatle is required')
+    }
+    if (favoriteBeatle === "Scooby-Doo") {
+      req.errors.push('favoriteBeatle must be a real Beatle member')
+    }
+  }
+
 
   next();
 }
