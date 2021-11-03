@@ -1,22 +1,23 @@
 extends layout.pug
 block content
+    h2 Existing Users
     table
         thead
-            h2 Existing Users
-            th id
-            th First Name
-            th Last Name
-            th Email
-            th Age
-            th Favorite Beatle
-            th Likes Ice Cream
-
+            tr
+                th id
+                th First Name
+                th Last Name
+                th Email
+                th Age
+                th Favorite Beatle
+                th Likes Ice Cream
         tbody
             each user in users
-                tr= user.id
-                tr= user.firstName
-                tr= user.lastName
-                tr= user.email
-                tr= user.age
-                tr= user.favoriteBeatle
-                tr= user.likesIceCream
+                tr
+                    td= user.id
+                    td= user.firstName
+                    td= user.lastName
+                    td= user.email
+                    td= user.age
+                    td= user.favoriteBeatle
+                    td= user.likesIceCream

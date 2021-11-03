@@ -30,7 +30,7 @@ app.get("/create", csurfProtection, (req, res) => {
 })
 
 const validation = (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, confirmedPassword } = req.body;
   req.errors = [];
 
   if (!firstName) {
@@ -45,9 +45,14 @@ const validation = (req, res, next) => {
   if (!password) {
     req.errors.push("Please provide a password.");
   }
+  if (password !== confirmedPassword) {
+    req.errors.push("The provided values for the password and password confirmation fields did not match.")
+  }
 
   next();
 }
+
+let nextId = 2;
 
 app.post("/create", csurfProtection, validation, (req, res) => {
   if (req.errors.length > 0) {
@@ -55,12 +60,15 @@ app.post("/create", csurfProtection, validation, (req, res) => {
   } else {
     users.push(
         {
+          id: nextId,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           email: req.body.email,
           password: req.body.password
       }
     )
+    nextId++
+    res.redirect('/')
   }
 })
 
