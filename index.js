@@ -49,10 +49,11 @@ const validation = (req, res, next) => {
   if (password !== confirmedPassword) {
     req.errors.push("The provided values for the password and password confirmation fields did not match.")
   }
-  if (age !== undefined && age < 0 || age > 120 || !(typeof age === Number )) {
-    req.errors.push('age must be a valid age')
-  }
+
   if (req.path === '/create-interesting') {
+    if (age < 0 || age > 120 || !(typeof age === Number )) {
+      req.errors.push('age must be a valid age')
+    }
     if (favoriteBeatle === undefined) {
       req.errors.push('favoriteBeatle is required')
     }
@@ -84,6 +85,8 @@ app.post("/create", csurfProtection, validation, (req, res) => {
     res.redirect('/')
   }
 })
+
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

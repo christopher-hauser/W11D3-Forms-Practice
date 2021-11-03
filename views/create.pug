@@ -3,4 +3,7 @@ include includes/errors.pug
 include includes/form-inputs.pug
 block content
     +errorsList(errors)
-    +formInput(csrfToken, firstName, lastName, email, password, confirmedPassword)
+    form(method="post" action="/create")
+        +formInput(csrfToken, firstName, lastName, email, password, confirmedPassword)
+        label(for="createUser") Create User
+        input(type='submit' name="createUser" value="Create User")
